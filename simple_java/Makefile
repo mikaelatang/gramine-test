@@ -36,9 +36,9 @@ helloworld.sig helloworld.manifest.sgx: sgx_sign
 
 .INTERMEDIATE: sgx_sign
 sgx_sign: helloworld.manifest helloworld
-        gramine-sgx-sign \
-                --manifest $< \
-                --output $<.sgx
+	gramine-sgx-sign \
+		--manifest $< \
+		--output $<.sgx
 
 .PHONY: clean
 clean:
