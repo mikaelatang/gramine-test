@@ -1,0 +1,25 @@
+# PAL entrypoint
+loader.entrypoint = "file:{{ gramine.libos }}"
+# executable (as compiled from Makefile) entrypoint
+libos.entrypoint = "/helloworld"
+# log level (error, warning, debug, trace, all or none) passed in through Makefile
+loader.log_level = "{{ log_level }}"
+
+# in-Gramine visible path to search for libraries
+loader.env.LD_LIBRARY_PATH = "/lib"
+
+# mount all required files and directories from host (uri) to Gramine (path) using default 'chroot' type
+fs.mounts = [
+  {path = "/lib", uri = "file:{{ gramine.runtimedir() }}"},
+  {path = "/helloworld", uri = "file::helloworld"}
+]
+
+# SGX options
+# insecure so don't set to true in final version
+sgx.debug = true
+# all files used by the executable and its dependencies
+sgx.trusted_files = [
+  "file:{{ gramine.libos }}",
+  "file:helloworld",
+  "file:{{ gramine.runtimedir() }}/"
+]
