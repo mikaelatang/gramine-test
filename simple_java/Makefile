@@ -1,11 +1,10 @@
-JFLAGS = -03
+JFLAGS = -g
 JC = javac
 WARN = -Wall
 
 # control log level
 ifeq ($(DEBUG),1)
 GRAMINE_LOG_LEVEL = debug
-JFLAGS = -g
 else
 GRAMINE_LOG_LEVEL = error
 endif
