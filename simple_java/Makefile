@@ -18,6 +18,9 @@ ifeq ($(SGX),1)
 all: helloworld.manifest.sgx helloworld.sig
 endif
 
+helloworld: helloworld.class
+	java helloworld
+
 helloworld.class: helloworld.java
     $(JC) $(JFLAGS) helloworld.java
 
