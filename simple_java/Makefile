@@ -22,17 +22,17 @@ helloworld: helloworld.class
 	java helloworld
 
 helloworld.class: helloworld.java
-    $(JC) $(JFLAGS) helloworld.java
+	$(JC) $(JFLAGS) helloworld.java
 
 helloworld.manifest: helloworld.manifest.template
-  gramine-manifest \
+	gramine-manifest \
 		-Dlog_level=$(GRAMINE_LOG_LEVEL) \
 		-Darch_libdir=$(ARCH_LIBDIR) \
 		$< > $@
 
 # mandatory configuration for running executable in SGX enclave
 helloworld.sig helloworld.manifest.sgx: sgx_sign
-        @:
+	@:
 
 .INTERMEDIATE: sgx_sign
 sgx_sign: helloworld.manifest helloworld
@@ -42,4 +42,4 @@ sgx_sign: helloworld.manifest helloworld
 
 .PHONY: clean
 clean:
-    $(RM) *.token *.sig *.manifest *.manifest.sgx *.class
+	$(RM) *.token *.sig *.manifest *.manifest.sgx *.class
