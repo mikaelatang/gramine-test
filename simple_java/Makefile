@@ -17,7 +17,7 @@ all: helloworld.manifest.sgx helloworld.sig
 endif
 
 helloworld: helloworld.class
-	java helloworld
+	java helloworld.class
 
 helloworld.class: helloworld.java
 	$(JC) $(JFLAGS) helloworld.java
