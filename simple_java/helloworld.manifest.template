@@ -2,7 +2,7 @@
 loader.entrypoint = "file:{{ gramine.libos }}"
 # executable (as compiled from Makefile) entrypoint
 libos.entrypoint = "{{ java_dir }}/java"
-loader.env.LD_LIBRARY_PATH = "/lib:{{ arch_libdir }}:/usr{{ arch_libdir }}"
+loader.env.LD_LIBRARY_PATH = "/lib"
 # log level (error, warning, debug, trace, all or none) passed in through Makefile
 loader.log_level = "{{ log_level }}"
 
@@ -12,8 +12,6 @@ loader.env.LD_LIBRARY_PATH = "/lib"
 # mount all required files and directories from host (uri) to Gramine (path) using default 'chroot' type
 fs.mounts = [
   {path = "/lib", uri = "file:{{ gramine.runtimedir() }}"},
-  { uri = "file:{{ arch_libdir }}", path = "{{ arch_libdir }}" },
-  { uri = "file:/usr/{{ arch_libdir }}", path = "/usr/{{ arch_libdir }}" },
   {path = "{{ java_dir }}/java", uri = "file::{{ java_dir }}/java"}
 ]
 
@@ -26,7 +24,6 @@ sgx.enclave_size = "1G"
 sgx.trusted_files = [
   "file:{{ gramine.libos }}",
   "file:helloworld.java",
+  "file:{{ java_dir }}/java",
   "file:{{ gramine.runtimedir() }}/",
-  "file:{{ arch_libdir }}/",
-  "file:/usr/{{ arch_libdir }}/"
 ]
