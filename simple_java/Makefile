@@ -2,6 +2,9 @@ JFLAGS = -g
 JC = javac
 WARN = -Wall
 
+JAVA_DIR ?= /usr/bin
+ARCH_LIBDIR ?= /lib/$(shell $(CC) -dumpmachine)
+
 # control log level
 ifeq ($(DEBUG),1)
 GRAMINE_LOG_LEVEL = debug
@@ -11,21 +14,16 @@ endif
 
 # control manifest creation for running outside of and within SGX enclave
 .PHONY: all
-all: helloworld helloworld.manifest
+all: helloworld.manifest
 ifeq ($(SGX),1)
 all: helloworld.manifest.sgx helloworld.sig
 endif
-
-helloworld: helloworld.class
-	java helloworld.class
-
-helloworld.class: helloworld.java
-	$(JC) $(JFLAGS) helloworld.java
 
 helloworld.manifest: helloworld.manifest.template
 	gramine-manifest \
 		-Dlog_level=$(GRAMINE_LOG_LEVEL) \
 		-Darch_libdir=$(ARCH_LIBDIR) \
+		-Djava_dir=$(JAVA_DIR) \
 		$< > $@
 
 # mandatory configuration for running executable in SGX enclave
@@ -40,4 +38,4 @@ sgx_sign: helloworld.manifest helloworld
 
 .PHONY: clean
 clean:
-	$(RM) *.token *.sig *.manifest *.manifest.sgx *.class
+	$(RM) *.token *.sig *.manifest *.manifest.sgx
