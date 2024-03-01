@@ -1,14 +1,13 @@
-JFLAGS = -Wall
+JFLAGS = -03
 JC = javac
 WARN = -Wall
 
 # control log level
 ifeq ($(DEBUG),1)
 GRAMINE_LOG_LEVEL = debug
-JFLAGS += -g
+JFLAGS = -g
 else
 GRAMINE_LOG_LEVEL = error
-JFLAGS += -03
 endif
 
 # control manifest creation for running outside of and within SGX enclave
