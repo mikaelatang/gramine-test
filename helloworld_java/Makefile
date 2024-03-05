@@ -1,3 +1,4 @@
+JAVA_DIR ?= /usr/bin/
 ARCH_LIBDIR ?= /lib/$(shell $(CC) -dumpmachine)
 
 # control log level
@@ -17,6 +18,7 @@ endif
 java.manifest: java.manifest.template
 	gramine-manifest \
 		-Dlog_level=$(GRAMINE_LOG_LEVEL) \
+		-Djava_dir=$(JAVA_DIR) \
 		-Darch_libdir=$(ARCH_LIBDIR) \
 		$< > $@
 
