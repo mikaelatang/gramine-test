@@ -6,14 +6,14 @@ libos.entrypoint = "/usr/lib/jvm/java-1.11.0-openjdk-amd64/bin/java"
 loader.log_level = "{{ log_level }}"
 
 # in-Gramine visible path to search for libraries
-loader.env.LD_LIBRARY_PATH = "/lib:{{ ARCH_LIBDIR }}:/usr/{{ ARCH_LIBDIR }}"
+loader.env.LD_LIBRARY_PATH = "/lib:{{ arch_libdir }}:/usr/{{ arch_libdir }}"
 
 # mount all required files and directories from host (uri) to Gramine (path) using default 'chroot' type
 fs.mounts = [
   {path = "/lib", uri = "file:{{ gramine.runtimedir() }}"},
-  {path = "{{ ARCH_LIBDIR }}", uri = "file::{{ ARCH_LIBDIR }}"},
-  {path = "/usr/{{ ARCH_LIBDIR }}", uri = "file::/usr/{{ ARCH_LIBDIR }}"},
-  {path = "/usr/lib/jvm/java-1.11.0-openjdk-amd64/bin/java", uri = "/usr/lib/jvm/java-1.11.0-openjdk-amd64/bin/java"}
+  {path = "{{ arch_libdir }}", uri = "file::{{ arch_libdir }}"},
+  {path = "/usr/{{ arch_libdir }}", uri = "file::/usr/{{ arch_libdir }}"},
+  {path = "/usr/lib/jvm/java-1.11.0-openjdk-amd64", uri = "/usr/lib/jvm/java-1.11.0-openjdk-amd64"}
 ]
 
 # SGX options
