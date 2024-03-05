@@ -1,8 +1,3 @@
-JFLAGS = -g
-JC = javac
-WARN = -Wall
-
-JAVA_DIR ?= /usr/bin
 ARCH_LIBDIR ?= /lib/$(shell $(CC) -dumpmachine)
 
 # control log level
@@ -23,7 +18,6 @@ helloworld.manifest: helloworld.manifest.template
 	gramine-manifest \
 		-Dlog_level=$(GRAMINE_LOG_LEVEL) \
 		-Darch_libdir=$(ARCH_LIBDIR) \
-		-Djava_dir=$(JAVA_DIR) \
 		$< > $@
 
 # mandatory configuration for running executable in SGX enclave
