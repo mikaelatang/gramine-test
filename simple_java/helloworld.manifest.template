@@ -1,29 +1,32 @@
 # PAL entrypoint
 loader.entrypoint = "file:{{ gramine.libos }}"
-# executable (as compiled from Makefile) entrypoint
-libos.entrypoint = "{{ java_dir }}/java"
-loader.env.LD_LIBRARY_PATH = "/lib"
+# executable entrypoint
+libos.entrypoint = "/usr/lib/jvm/java-1.11.0-openjdk-amd64/bin/java"
 # log level (error, warning, debug, trace, all or none) passed in through Makefile
 loader.log_level = "{{ log_level }}"
 
 # in-Gramine visible path to search for libraries
-loader.env.LD_LIBRARY_PATH = "/lib"
+loader.env.LD_LIBRARY_PATH = "/lib:{{ ARCH_LIBDIR }}:/usr/{{ ARCH_LIBDIR }}"
 
 # mount all required files and directories from host (uri) to Gramine (path) using default 'chroot' type
 fs.mounts = [
   {path = "/lib", uri = "file:{{ gramine.runtimedir() }}"},
-  {path = "{{ java_dir }}/java", uri = "file::{{ java_dir }}/java"}
+  {path = "{{ ARCH_LIBDIR }}", uri = "file::{{ ARCH_LIBDIR }}"},
+  {path = "/usr/{{ ARCH_LIBDIR }}", uri = "file::/usr/{{ ARCH_LIBDIR }}"},
+  {path = "/usr/lib/jvm/java-1.11.0-openjdk-amd64/bin/java", uri = "/usr/lib/jvm/java-1.11.0-openjdk-amd64/bin/java"}
 ]
 
 # SGX options
 # insecure so don't set to true in final version
 sgx.debug = true
-sgx.enclave_size = "1G"
+sgx.enclave_size = "8G"
 
 # all files used by the executable and its dependencies
 sgx.trusted_files = [
   "file:{{ gramine.libos }}",
-  "file:helloworld.java",
-  "file:{{ java_dir }}/java",
   "file:{{ gramine.runtimedir() }}/",
+  "file:{{ arch_libdir }}/",
+  "file:/usr/{{ arch_libdir }}/",
+  "file:/usr/lib/jvm/java-17-openjdk-amd64/",
+  "file:helloworld.java",
 ]
