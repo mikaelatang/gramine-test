@@ -4,6 +4,8 @@ loader.entrypoint = "file:{{ gramine.libos }}"
 libos.entrypoint = "/usr/lib/jvm/java-1.11.0-openjdk-amd64/bin/java"
 # log level (error, warning, debug, trace, all or none) passed in through Makefile
 loader.log_level = "{{ log_level }}"
+# command line arguments
+loader.argv_src_file = "file:java_args.txt"
 
 # in-Gramine visible path to search for libraries
 loader.env.LD_LIBRARY_PATH = "/lib:{{ arch_libdir }}:/usr/{{ arch_libdir }}"
@@ -13,7 +15,7 @@ fs.mounts = [
   {path = "/lib", uri = "file:{{ gramine.runtimedir() }}"},
   {path = "{{ arch_libdir }}", uri = "file::{{ arch_libdir }}"},
   {path = "/usr/{{ arch_libdir }}", uri = "file::/usr/{{ arch_libdir }}"},
-  {path = "/usr/lib/jvm/java-1.11.0-openjdk-amd64", uri = "/usr/lib/jvm/java-1.11.0-openjdk-amd64"}
+  {path = "/usr/lib/jvm/java-1.11.0-openjdk-amd64", uri = "/usr/lib/jvm/java-1.11.0-openjdk-amd64"},
 ]
 
 # SGX options
@@ -29,4 +31,5 @@ sgx.trusted_files = [
   "file:/usr/{{ arch_libdir }}/",
   "file:/usr/lib/jvm/java-17-openjdk-amd64/",
   "file:helloworld.java",
+  "file:java_args.txt"
 ]
