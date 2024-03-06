@@ -18,7 +18,7 @@ endif
 java.manifest: java.manifest.template
 	gramine-manifest \
 		-Dlog_level=$(GRAMINE_LOG_LEVEL) \
-		-Djava_dir=$(JAVA_VER) \
+		-Djava_ver=$(JAVA_VER) \
 		-Darch_libdir=$(ARCH_LIBDIR) \
 		$< > $@
 
