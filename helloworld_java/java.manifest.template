@@ -13,9 +13,9 @@ loader.env.LD_LIBRARY_PATH = "/lib:{{ arch_libdir }}:/usr/{{ arch_libdir }}"
 # mount all required files and directories from host (uri) to Gramine (path) using default 'chroot' type
 fs.mounts = [
   {path = "/lib", uri = "file:{{ gramine.runtimedir() }}"},
-  {path = "{{ arch_libdir }}", uri = "file::{{ arch_libdir }}"},
-  {path = "/usr/{{ arch_libdir }}", uri = "file::/usr/{{ arch_libdir }}"},
-  {path = "/usr/lib/jvm/java-1.11.0-openjdk-amd64", uri = "/usr/lib/jvm/java-1.11.0-openjdk-amd64"},
+  {path = "{{ arch_libdir }}", uri = "file:{{ arch_libdir }}"},
+  {path = "/usr/{{ arch_libdir }}", uri = "file:/usr/{{ arch_libdir }}"},
+  {path = "/usr/lib/jvm/java-1.11.0-openjdk-amd64", uri = "file:/usr/lib/jvm/java-1.11.0-openjdk-amd64"},
 ]
 
 # SGX options
