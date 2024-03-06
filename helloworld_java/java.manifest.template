@@ -1,7 +1,7 @@
 # PAL entrypoint
 loader.entrypoint = "file:{{ gramine.libos }}"
 # executable entrypoint
-libos.entrypoint = "{{ java_dir }}/java"
+libos.entrypoint = "/usr/lib/jvm/java-{{ java_ver }}-openjdk-amd64/bin/java"
 # log level (error, warning, debug, trace, all or none) passed in through Makefile
 loader.log_level = "{{ log_level }}"
 # command line arguments
@@ -15,7 +15,7 @@ fs.mounts = [
   {path = "/lib", uri = "file:{{ gramine.runtimedir() }}"},
   {path = "{{ arch_libdir }}", uri = "file:{{ arch_libdir }}"},
   {path = "/usr/{{ arch_libdir }}", uri = "file:/usr/{{ arch_libdir }}"},
-  {path = "{{ java_dir }}", uri = "file:{{ java_dir }}"},
+  {path = "/usr/lib/jvm/java-{{ java_ver }}-openjdk-amd64", uri = "file:/usr/lib/jvm/java-{{ java_ver }}-openjdk-amd64"},
 ]
 
 # SGX options
@@ -29,7 +29,7 @@ sgx.trusted_files = [
   "file:{{ gramine.runtimedir() }}/",
   "file:{{ arch_libdir }}/",
   "file:/usr/{{ arch_libdir }}/",
-  "file:{{ java_dir }}",
+  "file:/usr/lib/jvm/java-{{ java_ver }}-openjdk-amd64/",
   "file:helloworld.java",
   "file:java_args.txt"
 ]
