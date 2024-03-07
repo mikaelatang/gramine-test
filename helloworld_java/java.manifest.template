@@ -22,7 +22,7 @@ fs.mounts = [
 # insecure so don't set to true in final version
 sgx.debug = true
 sgx.enclave_size = "8G"
-sys.enable_sigterm_injection = true
+sgx.use_exinfo = true
 # sgx.thread_num = 64
 # sgx.nonpie_binary = true
 
