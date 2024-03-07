@@ -21,9 +21,9 @@ fs.mounts = [
 # SGX options
 # insecure so don't set to true in final version
 sgx.debug = true
-sgx.enclave_size = "3G"
-sgx.thread_num = 64
-sgx.nonpie_binary = true
+sgx.enclave_size = "4G"
+# sgx.thread_num = 64
+# sgx.nonpie_binary = true
 
 # all files used by the executable and its dependencies
 sgx.trusted_files = [
