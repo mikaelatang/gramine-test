@@ -16,13 +16,12 @@ fs.mounts = [
   {path = "{{ arch_libdir }}", uri = "file:{{ arch_libdir }}"},
   {path = "/usr/{{ arch_libdir }}", uri = "file:/usr/{{ arch_libdir }}"},
   {path = "/usr/lib/jvm/java-{{ java_ver }}-openjdk-amd64", uri = "file:/usr/lib/jvm/java-{{ java_ver }}-openjdk-amd64"},
-  {path = "helloworld.java", uri = "file:helloworld.java"}
 ]
 
 # SGX options
 # insecure so don't set to true in final version
 sgx.debug = true
-sgx.enclave_size = "8G"
+sgx.enclave_size = "2G"
 sgx.thread_num = 64
 sgx.nonpie_binary = true
 
