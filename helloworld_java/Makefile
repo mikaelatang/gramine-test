@@ -27,7 +27,7 @@ java.sig java.manifest.sgx: sgx_sign
 	@:
 
 .INTERMEDIATE: sgx_sign
-sgx_sign: java.manifest java
+sgx_sign: java.manifest
 	gramine-sgx-sign \
 		--manifest $< \
 		--output $<.sgx
