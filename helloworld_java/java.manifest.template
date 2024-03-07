@@ -16,6 +16,7 @@ fs.mounts = [
   {path = "{{ arch_libdir }}", uri = "file:{{ arch_libdir }}"},
   {path = "/usr/{{ arch_libdir }}", uri = "file:/usr/{{ arch_libdir }}"},
   {path = "/usr/lib/jvm/java-{{ java_ver }}-openjdk-amd64", uri = "file:/usr/lib/jvm/java-{{ java_ver }}-openjdk-amd64"},
+  {path = "helloworld.java", uri = "file:helloworld.java"}
 ]
 
 # SGX options
