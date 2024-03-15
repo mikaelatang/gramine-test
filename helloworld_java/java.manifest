@@ -1,0 +1,55 @@
+[loader]
+entrypoint = "file:/usr/lib/x86_64-linux-gnu/gramine/libsysdb.so"
+log_level = "error"
+argv_src_file = "file:java_args.txt"
+
+[loader.env]
+LD_LIBRARY_PATH = "/lib:/lib/x86_64-linux-gnu:/usr//lib/x86_64-linux-gnu"
+
+[libos]
+entrypoint = "/usr/lib/jvm/java-17-openjdk-amd64/bin/java"
+
+[[fs.mounts]]
+path = "/lib"
+uri = "file:/usr/lib/x86_64-linux-gnu/gramine/runtime/glibc"
+
+[[fs.mounts]]
+path = "/lib/x86_64-linux-gnu"
+uri = "file:/lib/x86_64-linux-gnu"
+
+[[fs.mounts]]
+path = "/usr//lib/x86_64-linux-gnu"
+uri = "file:/usr//lib/x86_64-linux-gnu"
+
+[[fs.mounts]]
+path = "/usr/lib/jvm/java-17-openjdk-amd64"
+uri = "file:/usr/lib/jvm/java-17-openjdk-amd64"
+
+[sgx]
+debug = false
+enclave_size = "8G"
+thread_num = 64
+nonpie_binary = true
+trusted_files = [
+    { uri = "file:/usr/lib/x86_64-linux-gnu/gramine/libsysdb.so" },
+    { uri = "file:/usr/lib/x86_64-linux-gnu/gramine/runtime/glibc/" },
+    { uri = "file:/lib/x86_64-linux-gnu/" },
+    { uri = "file:/usr//lib/x86_64-linux-gnu/" },
+    { uri = "file:/usr/lib/jvm/java-17-openjdk-amd64/" },
+    { uri = "file:build/libs/helloworld.jar" },
+    { uri = "file:java_args.txt" },
+]
+max_threads = 4
+isvprodid = 0
+isvsvn = 0
+remote_attestation = "none"
+enable_stats = false
+edmm_enable = false
+use_exinfo = false
+
+[sgx.cpu_features]
+avx = "unspecified"
+avx512 = "unspecified"
+amx = "unspecified"
+mpx = "disabled"
+pkru = "disabled"

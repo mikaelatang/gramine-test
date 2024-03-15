@@ -1,4 +1,4 @@
-JAVA_VER ?= 11
+JAVA_VER ?= 17
 ARCH_LIBDIR ?= /lib/$(shell $(CC) -dumpmachine)
 
 # control log level

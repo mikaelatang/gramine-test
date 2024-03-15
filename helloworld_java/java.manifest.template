@@ -20,11 +20,11 @@ fs.mounts = [
 
 # SGX options
 # insecure so don't set to true in final version
-sgx.debug = true
+sgx.debug = false
 sgx.enclave_size = "8G"
-sgx.use_exinfo = true
-# sgx.thread_num = 64
-# sgx.nonpie_binary = true
+# sgx.use_exinfo = true
+sgx.thread_num = 64
+sgx.nonpie_binary = true
 
 # all files used by the executable and its dependencies
 sgx.trusted_files = [
@@ -33,6 +33,6 @@ sgx.trusted_files = [
   "file:{{ arch_libdir }}/",
   "file:/usr/{{ arch_libdir }}/",
   "file:/usr/lib/jvm/java-{{ java_ver }}-openjdk-amd64/",
-  "file:helloworld.java",
+  "file:build/libs/helloworld.jar",
   "file:java_args.txt"
 ]
