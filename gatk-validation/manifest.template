@@ -1,0 +1,39 @@
+loader.entrypoint = "file:{{ gramine.libos }}"
+#libos.entrypoint = "/gatk/gatk"
+libos.entrypoint = "{{ execdir }}/bash"
+loader.log_level = "{{ log_level }}"
+
+loader.env.LD_LIBRARY_PATH = "/lib:{{ arch_libdir }}:/usr{{ arch_libdir }}"
+loader.env.PATH = "{{ execdir }}"
+
+loader.insecure__use_cmdline_argv = true
+
+fs.mounts = [
+	{ path = "/lib", uri = "file:{{ gramine.runtimedir() }}" },
+	{ path = "{{ arch_libdir }}", uri = "file:{{ arch_libdir }}" },
+	{ path = "{{ execdir }}", uri = "file:{{ execdir }}" },
+	{ path = "/usr/lib", uri = "file:/usr/lib" },
+	{ path = "/gatk", uri = "file:/gatk" },
+	{ path = "/inputs", uri = "file:/inputs" },
+	{ path = "/app", uri = "file:/app" },
+]
+
+#sys.stack.size = "2M"
+sgx.enclave_size = "8G"
+sgx_max_threads = 512
+sgx.debug = true
+
+sgx.trusted_files = [
+	"file:{{ gramine.libos }}",
+	"file:{{ execdir }}/",
+	"file:{{ gramine.runtimedir() }}/",
+	"file:{{ arch_libdir }}/",
+	"file:/usr/{{ arch_libdir }}/",
+	"file:/gatk/",
+	"file:/app/",
+]
+
+# allow sgx to access file(s) input files mounted to docker container
+sgx.allowed_files = [
+	"file:/inputs/",
+]
