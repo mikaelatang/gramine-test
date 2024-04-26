@@ -14,6 +14,7 @@ RUN echo "deb [arch=amd64 signed-by=/usr/share/keyrings/gramine-keyring.gpg] htt
 RUN curl -fsSLo /usr/share/keyrings/intel-sgx-deb.asc https://download.01.org/intel-sgx/sgx_repo/ubuntu/intel-sgx-deb.key
 RUN echo "deb [arch=amd64 signed-by=/usr/share/keyrings/intel-sgx-deb.asc] https://download.01.org/intel-sgx/sgx_repo/ubuntu $(lsb_release -sc) main" | tee /etc/apt/sources.list.d/intel-sgx.list
 RUN apt-get update && apt-get install -y gramine
+RUN chmod 777 /usr/bin/python3
 RUN ln -s /usr/bin/python3 /usr/bin/python
 
 #COPY --from=app /gatk /gatk/
